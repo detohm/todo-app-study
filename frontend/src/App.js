@@ -1,5 +1,7 @@
+import './style.css';
+
 function App() {
-    return (<h1>To Do List App</h1>);
+    return (<div className='app'>To Do List App</div>);
 }
 
 export default App;
