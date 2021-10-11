@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
 export class Button extends React.Component {
-    render() {
-        return (
-            <button onClick={this.props.onClick}>
-                {this.props.label}
-            </button>
-        );
-    }
-};
+  render() {
+    return (
+      <button onClick={this.props.onClick}>
+        {this.props.label}
+      </button>
+    );
+  }
+}
 
 Button.defaultProps = {
-    onClick: () => { },
-    label: "[label]"
-}
+  onClick: () => { },
+  label: "[label]",
+};
