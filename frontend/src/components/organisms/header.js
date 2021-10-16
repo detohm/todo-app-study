@@ -1,5 +1,5 @@
 import React from 'react'
-import { Title } from '../atoms/title'
+import { Title } from '../atoms/Title'
 
 export class Header extends React.Component {
     render() {
