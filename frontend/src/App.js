@@ -1,15 +1,13 @@
-import { Button } from "./components/atoms/button";
-import { Card } from "./components/atoms/card";
-import { Header } from "./components/organisms/header";
+import React from 'react';
+import { Header } from "./components/organisms/Header";
+import { ToDoList } from "./components/organisms/ToDoList";
 import "./style.scss";
+
 function App() {
   return (
     <div className="app">
       <Header />
-      <Button label="click!" />
-      <Card>
-        <Button label="card button" />
-      </Card>
+      <ToDoList />
 
     </div>
   );
