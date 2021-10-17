@@ -1,15 +1,17 @@
 import React from 'react';
 import { IconButton } from '../atoms/IconButton';
-export const ToDoItem = ({ label }) => {
+export const ToDoItem = ({ text, id, onDelete }) => {
+
     return (
         <div>
-            <IconButton />
-            <label>{label}</label>
-            <IconButton />
+            <IconButton label="complete" />
+            <label>{text}</label>
+            <IconButton id={id} label="delete" onClick={onDelete} />
         </div>
     );
 };
 
 ToDoItem.defaultProps = {
-    label: "[item]"
+    text: "[item]",
+    id: null
 }
