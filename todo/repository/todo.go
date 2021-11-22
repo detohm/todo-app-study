@@ -16,14 +16,13 @@ func NewToDoRepository(db *sql.DB) todo.Repository {
 }
 
 func (r *toDoRepository) GetToDoList() ([]todo.ToDo, error) {
-	// TODO - use results from db
+
 	rows, err := r.db.Query(`
 		SELECT 
 			id,
 			description,
 			is_completed,
-			is_deleted
-
+			is_deleted 
 		FROM 
 			todo`)
 
