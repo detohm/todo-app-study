@@ -3,16 +3,21 @@ import ToDoForm from "./components/organisms/ToDoForm";
 import ToDoList from "./components/organisms/ToDoList";
 import "./style.scss";
 
-const style = {
+const style: React.CSSProperties = {
   width: "300px",
   margin: "0 auto",
   position: "relative",
   top: 60
 };
 
+export interface ToDoItem {
+  text: string;
+  id: number;
+}
+
 const App = () => {
 
-  const [toDos, setToDos] = useState([]);
+  const [toDos, setToDos] = useState<ToDoItem[]>([]);
 
   // TODO - remove mock data to retrieve from server
   useEffect(() => {
@@ -23,7 +28,7 @@ const App = () => {
     ]);
   }, []);
 
-  const handleSubmit = (newToDoText) => {
+  const handleSubmit = (newToDoText: string) => {
     setToDos((prevToDos) => [
       ...prevToDos,
       {
@@ -33,7 +38,7 @@ const App = () => {
     ]);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     setToDos(toDos.filter((item) => item.id !== id));
   };
 
