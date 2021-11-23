@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import ToDoForm from "./components/organisms/ToDoForm";
-import ToDoList from "./components/organisms/ToDoList";
-import "./style.scss";
-
-const style: React.CSSProperties = {
-  width: "300px",
-  margin: "0 auto",
-  position: "relative",
-  top: 60
-};
-
-export interface ToDoItem {
-  text: string;
-  id: number;
-}
+import { IToDo } from './App.interface';
+import styles from './App.module.css';
+import ToDoForm from "./components/organisms/ToDoForm/ToDoForm";
+import ToDoList from "./components/organisms/ToDoList/ToDoList";
 
 const App = () => {
 
-  const [toDos, setToDos] = useState<ToDoItem[]>([]);
+  const [toDos, setToDos] = useState<IToDo[]>([]);
 
   // TODO - remove mock data to retrieve from server
   useEffect(() => {
@@ -43,7 +32,7 @@ const App = () => {
   };
 
   return (
-    <div className="app" style={style} >
+    <div className={styles.app} >
       <ToDoForm onSubmit={handleSubmit} />
       <ToDoList toDos={toDos} onItemDelete={handleDelete} />
     </div>

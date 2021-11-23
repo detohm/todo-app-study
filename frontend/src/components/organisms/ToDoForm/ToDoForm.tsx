@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-
-const style = {
-    border: "1px solid blue",
-    ["margin-bottom"]: "24px"
-};
-
+import { IToDoForm } from './ToDoForm.interface';
+import styles from './ToDoForm.module.css';
 const inputStyle = {
     width: "280px"
 };
 
-const ToDoForm = ({ onSubmit, placeHolderText }) => {
+const ToDoForm = ({
+    onSubmit,
+    placeHolderText = "input here !"
+}: IToDoForm) => {
 
     const [value, setValue] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (value === "") {
             return;
@@ -23,7 +22,7 @@ const ToDoForm = ({ onSubmit, placeHolderText }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} style={style} >
+        <form onSubmit={handleSubmit} className={styles.form} >
             <input style={inputStyle} type="text" value={value} placeholder={placeHolderText} onChange={(e) => setValue(e.target.value)} />
         </form>
     )
