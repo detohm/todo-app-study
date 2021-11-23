@@ -17,4 +17,5 @@ func NewRouteV1(e *echo.Echo, h *handler.ToDoHandler) *RouteV1 {
 func (r *RouteV1) Bind() {
 	v1 := r.echo.Group("/api/v1")
 	v1.GET("/todos", r.toDoHandler.GetToDoList)
+	v1.POST("/todo", r.toDoHandler.CreateToDo)
 }

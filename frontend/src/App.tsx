@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './App.module.css';
 import ToDoForm from "./components/organisms/ToDoForm/ToDoForm";
 import ToDoList from "./components/organisms/ToDoList/ToDoList";
-import { getToDos, IToDo } from './services/todo.service';
+import { createToDos, getToDos, IToDo } from './services/todo.service';
 
 const App = () => {
 
@@ -20,7 +20,23 @@ const App = () => {
   }, []);
 
   const handleSubmit = (newToDoText: string) => {
-    console.log(newToDoText)
+    let todo: IToDo = {
+      id: 0,
+      description: newToDoText,
+      isCompleted: false,
+      isDeleted: false
+    };
+
+    createToDos(todo).then((res) => {
+      if (res.data) {
+        setToDos((prev: IToDo[]) => {
+          todo.id = res.data
+          return [...prev, todo];
+        });
+      }
+    }).catch((e) => {
+      console.log(e)
+    });
   };
 
   const handleDelete = (id: number) => {

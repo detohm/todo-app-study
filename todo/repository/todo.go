@@ -26,6 +26,8 @@ func (r *toDoRepository) GetToDoList() ([]todo.ToDo, error) {
 		FROM 
 			todo`)
 
+	defer rows.Close()
+
 	if err != nil {
 		fmt.Print(err)
 		return nil, err
@@ -45,4 +47,24 @@ func (r *toDoRepository) GetToDoList() ([]todo.ToDo, error) {
 	}
 
 	return results, nil
+}
+
+func (r *toDoRepository) CreateToDo(t todo.ToDo) (int64, error) {
+
+	res, err := r.db.Exec(`
+	INSERT INTO 
+		todo
+	(description, is_completed, is_deleted)
+	VALUES (?,?,?)
+	`,
+		t.Description,
+		false,
+		false)
+
+	if err != nil {
+		fmt.Print(err)
+		return -1, err
+	}
+
+	return res.LastInsertId()
 }

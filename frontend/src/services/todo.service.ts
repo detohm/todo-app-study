@@ -10,5 +10,12 @@ export interface IToDo {
 };
 
 export const getToDos = async (): Promise<AxiosResponse<IToDo[]>> => {
-    return await axios.create({ baseURL: baseURL }).get<IToDo[]>(`/todos`);
+    return await axios.create({ baseURL: baseURL })
+        .get<IToDo[]>(`/todos`);
 };
+
+export const createToDos = async (data: IToDo):
+    Promise<AxiosResponse<number>> => {
+    return await axios
+        .create({ baseURL: baseURL }).post<number>(`/todo`, data);
+}

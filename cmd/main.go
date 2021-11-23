@@ -1,8 +1,12 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"log"
+	"os"
+	"os/signal"
+	"time"
 
 	"github.com/labstack/echo/v4/middleware"
 
@@ -38,13 +42,24 @@ func main() {
 	e.Static("/", "./frontend/build")
 
 	e.Use(middleware.Logger())
-	e.Start(":5000")
 
-	// fs := http.FileServer(http.Dir("./frontend/build"))
-	// http.Handle("/", fs)
-	// err := http.ListenAndServe(":5500", nil)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	// start server in another go routine
+	go func() {
+		err := e.Start(":" + conf.Port)
+		if err != nil {
+			log.Println("couldn't initialize the server")
+		}
+	}()
 
+	sig := make(chan os.Signal, 1)
+	signal.Notify(sig, os.Interrupt)
+	<-sig
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	err = e.Shutdown(ctx)
+	if err != nil {
+		log.Panic(err)
+	}
 }

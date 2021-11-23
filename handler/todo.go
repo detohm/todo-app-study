@@ -23,3 +23,14 @@ func (h *ToDoHandler) GetToDoList(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, todos)
 }
+
+func (h *ToDoHandler) CreateToDo(c echo.Context) error {
+	t := todo.ToDo{}
+	c.Bind(&t)
+
+	insertId, err := h.service.CreateToDo(t)
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "fail")
+	}
+	return c.JSON(http.StatusOK, insertId)
+}
