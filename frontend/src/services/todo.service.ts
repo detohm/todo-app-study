@@ -19,3 +19,13 @@ export const createToDos = async (data: IToDo):
     return await axios
         .create({ baseURL: baseURL }).post<number>(`/todo`, data);
 }
+
+export const completeToDo = async (id: number): Promise<AxiosResponse> => {
+    return await axios.create({ baseURL: baseURL })
+        .patch(`/todo`, { id: id });
+}
+
+export const deleteToDo = async (id: number): Promise<AxiosResponse> => {
+    return await axios.create({ baseURL: baseURL })
+        .delete(`/todo/${id}`);
+}

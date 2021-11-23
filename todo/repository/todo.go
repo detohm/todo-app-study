@@ -24,14 +24,15 @@ func (r *toDoRepository) GetToDoList() ([]todo.ToDo, error) {
 			is_completed,
 			is_deleted 
 		FROM 
-			todo`)
-
-	defer rows.Close()
+			todo
+		WHERE 
+		    is_deleted = false`)
 
 	if err != nil {
 		fmt.Print(err)
 		return nil, err
 	}
+	defer rows.Close()
 
 	results := []todo.ToDo{}
 
@@ -67,4 +68,38 @@ func (r *toDoRepository) CreateToDo(t todo.ToDo) (int64, error) {
 	}
 
 	return res.LastInsertId()
+}
+
+func (r *toDoRepository) CompleteToDo(id int64) error {
+	_, err := r.db.Exec(`
+	UPDATE 
+	   todo
+	SET 
+	  is_completed = true
+	WHERE
+	  id = ?
+	`, id)
+	if err != nil {
+		fmt.Print(err)
+		return err
+	}
+	return nil
+
+}
+
+func (r *toDoRepository) DeleteToDo(id int64) error {
+
+	_, err := r.db.Exec(`
+	UPDATE 
+	   todo
+	SET 
+	  is_deleted = true
+	WHERE
+	  id = ?
+	`, id)
+	if err != nil {
+		fmt.Print(err)
+		return err
+	}
+	return nil
 }

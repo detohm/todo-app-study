@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/detohm/todo-app-study/todo"
 	"github.com/labstack/echo/v4"
@@ -33,4 +34,30 @@ func (h *ToDoHandler) CreateToDo(c echo.Context) error {
 		return c.String(http.StatusInternalServerError, "fail")
 	}
 	return c.JSON(http.StatusOK, insertId)
+}
+
+func (h *ToDoHandler) CompleteToDo(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "fail")
+	}
+	id64 := int64(id)
+	err = h.service.CompleteToDo(id64)
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "fail")
+	}
+	return c.JSON(http.StatusOK, "ok")
+}
+
+func (h *ToDoHandler) DeleteTodo(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "fail")
+	}
+	id64 := int64(id)
+	err = h.service.DeleteToDo(id64)
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "fail")
+	}
+	return c.JSON(http.StatusOK, "ok")
 }

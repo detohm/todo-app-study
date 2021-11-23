@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './App.module.css';
 import ToDoForm from "./components/organisms/ToDoForm/ToDoForm";
 import ToDoList from "./components/organisms/ToDoList/ToDoList";
-import { createToDos, getToDos, IToDo } from './services/todo.service';
+import { createToDos, deleteToDo, getToDos, IToDo } from './services/todo.service';
 
 const App = () => {
 
@@ -35,12 +35,16 @@ const App = () => {
         });
       }
     }).catch((e) => {
-      console.log(e)
+      console.log(e);
     });
   };
 
   const handleDelete = (id: number) => {
-    setToDos(toDos.filter((item) => item.id !== id));
+    deleteToDo(id).then((res) => {
+      setToDos(toDos.filter((item) => item.id !== id));
+    }).catch((e) => {
+      console.log(e);
+    });
   };
 
   return (

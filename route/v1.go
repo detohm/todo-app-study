@@ -18,4 +18,6 @@ func (r *RouteV1) Bind() {
 	v1 := r.echo.Group("/api/v1")
 	v1.GET("/todos", r.toDoHandler.GetToDoList)
 	v1.POST("/todo", r.toDoHandler.CreateToDo)
+	v1.PATCH("/todo", r.toDoHandler.CompleteToDo)
+	v1.DELETE("/todo/:id", r.toDoHandler.DeleteTodo)
 }
