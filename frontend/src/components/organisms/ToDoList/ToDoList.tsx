@@ -7,7 +7,12 @@ const ToDoList = ({ toDos, onItemDelete }: ITodoList) => {
     return (
         <div className={styles.list}>
             {toDos.map((toDo) =>
-                (<ToDoItem key={toDo.id} id={toDo.id} text={toDo.text} onDelete={onItemDelete} />))}
+            (<ToDoItem
+                key={toDo.id}
+                id={toDo.id}
+                text={toDo.description}
+                onDelete={onItemDelete}
+            />))}
         </div>
     );
 };

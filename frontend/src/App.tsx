@@ -1,30 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { IToDo } from './App.interface';
 import styles from './App.module.css';
 import ToDoForm from "./components/organisms/ToDoForm/ToDoForm";
 import ToDoList from "./components/organisms/ToDoList/ToDoList";
+import { getToDos, IToDo } from './services/todo.service';
 
 const App = () => {
 
   const [toDos, setToDos] = useState<IToDo[]>([]);
 
-  // TODO - remove mock data to retrieve from server
   useEffect(() => {
-    setToDos([
-      { text: "read books", id: 1 },
-      { text: "practise programming", id: 2 },
-      { text: "work out", id: 3 }
-    ]);
+
+    getToDos().then((res) => {
+      if (res.data)
+        setToDos(res.data);
+    }).catch((e) => {
+      console.log(e);
+    });
+
   }, []);
 
   const handleSubmit = (newToDoText: string) => {
-    setToDos((prevToDos) => [
-      ...prevToDos,
-      {
-        text: newToDoText,
-        id: Date.now() // TODO - change to persistance layer
-      }
-    ]);
+    console.log(newToDoText)
   };
 
   const handleDelete = (id: number) => {

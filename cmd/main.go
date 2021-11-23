@@ -35,6 +35,8 @@ func main() {
 	route := route.NewRouteV1(e, handler)
 	route.Bind()
 
+	e.Static("/", "./frontend/build")
+
 	e.Use(middleware.Logger())
 	e.Start(":5000")
 

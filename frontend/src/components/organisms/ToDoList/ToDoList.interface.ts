@@ -1,4 +1,4 @@
-import { IToDo } from "../../../App.interface";
+import { IToDo } from "../../../services/todo.service";
 
 export interface ITodoList {
     toDos: IToDo[];
