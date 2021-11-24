@@ -1,5 +1,6 @@
+import { faCheck, faSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { IconButton } from '../../atoms/IconButton/IconButton';
 import { IToDoItem } from './ToDoItem.interface';
 
 const style = {
@@ -7,18 +8,28 @@ const style = {
     padding: "10px"
 };
 
-export const ToDoItem = ({ text, id, onDelete }: IToDoItem) => {
+export const ToDoItem = ({ id, index, text, isCompleted, onComplete, onDelete }: IToDoItem) => {
+
+    const handleCompleteClick = (e: React.MouseEvent<SVGSVGElement>) => {
+        e.preventDefault();
+        console.log("id:" + id + ",index:" + index);
+        onComplete(id, index);
+    };
+
+    const handleDeleteClick = (e: React.MouseEvent<SVGSVGElement>) => {
+        e.preventDefault();
+        onDelete(id);
+    };
 
     return (
         <div style={style}>
-            <IconButton id={id} label="complete" />
+            <FontAwesomeIcon
+                icon={isCompleted ? faCheck : faSquare}
+                onClick={handleCompleteClick} />
             <label>{text}</label>
-            <IconButton id={id} label="delete" onClick={onDelete} />
+            <FontAwesomeIcon
+                icon={faTrash}
+                onClick={handleDeleteClick} />
         </div>
     );
 };
-
-ToDoItem.defaultProps = {
-    text: "[item]",
-    id: null
-}

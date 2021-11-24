@@ -3,14 +3,17 @@ import { ToDoItem } from '../../molecules/ToDoItem/ToDoItem';
 import { ITodoList } from './ToDoList.interface';
 import styles from './ToDoList.module.css';
 
-const ToDoList = ({ toDos, onItemDelete }: ITodoList) => {
+const ToDoList = ({ toDos, onItemComplete, onItemDelete }: ITodoList) => {
     return (
         <div className={styles.list}>
-            {toDos.map((toDo) =>
+            {toDos.map((toDo, index) =>
             (<ToDoItem
                 key={toDo.id}
                 id={toDo.id}
+                index={index}
                 text={toDo.description}
+                isCompleted={toDo.isCompleted}
+                onComplete={onItemComplete}
                 onDelete={onItemDelete}
             />))}
         </div>

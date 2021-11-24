@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './App.module.css';
 import ToDoForm from "./components/organisms/ToDoForm/ToDoForm";
 import ToDoList from "./components/organisms/ToDoList/ToDoList";
-import { createToDos, deleteToDo, getToDos, IToDo } from './services/todo.service';
+import { completeToDo, createToDos, deleteToDo, getToDos, IToDo } from './services/todo.service';
 
 const App = () => {
 
@@ -47,10 +47,23 @@ const App = () => {
     });
   };
 
+  const handleComplete = (id: number, index: number) => {
+    completeToDo(id).then((res) => {
+      let newToDos = [...toDos];
+      newToDos[index].isCompleted = true;
+      setToDos(newToDos);
+    }).catch((e) => {
+      console.log(e);
+    });
+  };
+
   return (
     <div className={styles.app} >
       <ToDoForm onSubmit={handleSubmit} />
-      <ToDoList toDos={toDos} onItemDelete={handleDelete} />
+      <ToDoList
+        toDos={toDos}
+        onItemComplete={handleComplete}
+        onItemDelete={handleDelete} />
     </div>
   );
 }
