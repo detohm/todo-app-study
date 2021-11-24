@@ -1,18 +1,14 @@
-import { faCheck, faSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faSquare } from '@fortawesome/free-regular-svg-icons';
+import { faCheckSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { IToDoItem } from './ToDoItem.interface';
-
-const style = {
-    border: "1px solid yellow",
-    padding: "10px"
-};
+import styles from './ToDoItem.module.css';
 
 export const ToDoItem = ({ id, index, text, isCompleted, onComplete, onDelete }: IToDoItem) => {
 
     const handleCompleteClick = (e: React.MouseEvent<SVGSVGElement>) => {
         e.preventDefault();
-        console.log("id:" + id + ",index:" + index);
         onComplete(id, index);
     };
 
@@ -22,13 +18,15 @@ export const ToDoItem = ({ id, index, text, isCompleted, onComplete, onDelete }:
     };
 
     return (
-        <div style={style}>
+        <div className={styles.item}>
             <FontAwesomeIcon
-                icon={isCompleted ? faCheck : faSquare}
+                icon={isCompleted ? faCheckSquare : faSquare}
+                className={styles['complete-icon']}
                 onClick={handleCompleteClick} />
-            <label>{text}</label>
+            <div className={styles.label}>{text}</div>
             <FontAwesomeIcon
                 icon={faTrash}
+                className={styles['trash-icon']}
                 onClick={handleDeleteClick} />
         </div>
     );

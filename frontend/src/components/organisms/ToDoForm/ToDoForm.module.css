@@ -1,4 +1,19 @@
 .form {
-    border: 1px solid blue;
     margin-bottom: 24px;
+    width: 100%;
+}
+
+.input-text {
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px #bbb;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+.input-text:focus {
+    border-bottom: 2px solid orange;
+    outline: none;
 }

@@ -59,6 +59,7 @@ const App = () => {
 
   return (
     <div className={styles.app} >
+      <h1>Todo App</h1>
       <ToDoForm onSubmit={handleSubmit} />
       <ToDoList
         toDos={toDos}

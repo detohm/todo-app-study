@@ -1,0 +1,26 @@
+.item {
+    
+    vertical-align: middle;
+    padding: 10px;
+    min-height: 30px;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.complete-icon {
+    margin-right:15px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.label {
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.trash-icon {
+    float: right;
+    cursor: pointer;
+    vertical-align: middle;
+}
