@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const baseURL = "http://localhost:3000/api/v1";
-
+const baseURL = "/api/v1";
 export interface IToDo {
     id: number;
     description: string;
