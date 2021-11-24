@@ -1,3 +1,4 @@
+//go:generate mockgen -source ./repository.go -destination ./mock/repository.go -package=mock
 package todo
 
 type Repository interface {
