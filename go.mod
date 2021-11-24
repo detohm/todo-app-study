@@ -3,6 +3,7 @@ module github.com/detohm/todo-app-study
 go 1.17
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/labstack/echo/v4 v4.6.1
 )
