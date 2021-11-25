@@ -17,6 +17,9 @@ import (
 	todoService "github.com/detohm/todo-app-study/todo/service"
 	"github.com/labstack/echo/v4"
 
+	"net/http"
+	_ "net/http/pprof"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -49,6 +52,10 @@ func main() {
 		if err != nil {
 			log.Println("couldn't initialize the server")
 		}
+	}()
+
+	go func() {
+		log.Println(http.ListenAndServe(":6060", nil))
 	}()
 
 	sig := make(chan os.Signal, 1)

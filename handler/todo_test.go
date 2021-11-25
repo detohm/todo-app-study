@@ -79,3 +79,21 @@ func TestToDoHandler_GetToDoList(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkToDoHandler_GetToDoList(b *testing.B) {
+
+	mockCtrl := gomock.NewController(b)
+	mockService := mock.NewMockService(mockCtrl)
+	for i := 0; i < b.N; i++ {
+		mockService.EXPECT().GetToDoList().
+			Return([]todo.ToDo{{1, "test", false, false}}, nil)
+	}
+	h := NewHandler(mockService)
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/todos", nil)
+	rec := httptest.NewRecorder()
+	e := echo.New()
+
+	for i := 0; i < b.N; i++ {
+		h.GetToDoList(e.NewContext(req, rec))
+	}
+}

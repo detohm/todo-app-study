@@ -3,3 +3,8 @@ main
 volumes/
 temps/
 tmp/
+
+# bench
+cpu.out
+*.test
+mem.out
