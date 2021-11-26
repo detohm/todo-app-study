@@ -7,6 +7,7 @@ import { completeToDo, createToDos, deleteToDo, getToDos, IToDo } from './servic
 const App = () => {
 
   const [toDos, setToDos] = useState<IToDo[]>([]);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
 
@@ -15,6 +16,7 @@ const App = () => {
         setToDos(res.data);
     }).catch((e) => {
       console.log(e);
+      setHasError(true);
     });
 
   }, []);
@@ -36,6 +38,7 @@ const App = () => {
       }
     }).catch((e) => {
       console.log(e);
+      setHasError(true);
     });
   };
 
@@ -44,6 +47,7 @@ const App = () => {
       setToDos(toDos.filter((item) => item.id !== id));
     }).catch((e) => {
       console.log(e);
+      setHasError(true);
     });
   };
 
@@ -54,11 +58,14 @@ const App = () => {
       setToDos(newToDos);
     }).catch((e) => {
       console.log(e);
+      setHasError(true);
     });
   };
 
   return (
+
     <div className={styles.app} >
+      {hasError ? <div className={styles['error-bar']}>Oops! an error occurred. Please try again.</div> : ""}
       <h1>Todo App</h1>
       <ToDoForm onSubmit={handleSubmit} />
       <ToDoList
@@ -66,6 +73,7 @@ const App = () => {
         onItemComplete={handleComplete}
         onItemDelete={handleDelete} />
     </div>
+
   );
 }
 
