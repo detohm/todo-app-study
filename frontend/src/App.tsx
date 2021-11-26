@@ -62,10 +62,17 @@ const App = () => {
     });
   };
 
+  if (hasError) {
+    return (
+      <div className={styles.app}>
+        <div className={styles['error-bar']}>Oops! an error occurred. Please try again.</div>
+      </div>
+    );
+  }
+
   return (
 
     <div className={styles.app} >
-      {hasError ? <div className={styles['error-bar']}>Oops! an error occurred. Please try again.</div> : ""}
       <h1>Todo App</h1>
       <ToDoForm onSubmit={handleSubmit} />
       <ToDoList
